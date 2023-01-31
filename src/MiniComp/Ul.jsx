@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Ul = (props) => {
-  return (
-    <ul className={props.Class}>
-        {props.children}
-    </ul>
-  );
-}
+  return <ul className={props.className}>{props.children}</ul>;
+};
 
 export default Ul;

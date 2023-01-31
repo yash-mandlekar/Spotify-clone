@@ -2,7 +2,7 @@ import React from 'react';
 
 const Span = (props) => {
   return (
-    <span className={props.Class}>{props.children}</span>
+    <span className={props.className}>{props.children}</span>
   );
 }
 

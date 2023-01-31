@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Li = (props) => {
-  return (
-    <li className={props.Class}>
-        {props.children}
-    </li>
-  );
-}
+  return <li className={props.className}>{props.children}</li>;
+};
 
 export default Li;

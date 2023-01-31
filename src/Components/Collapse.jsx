@@ -10,6 +10,9 @@ import {
 } from "react-icons/io";
 import { HiUsers } from "react-icons/hi";
 import { TbChevronDown, TbChevronRight } from "react-icons/tb";
+import Div from "../MiniComp/Div";
+import Span from "../MiniComp/Span";
+import A from "../MiniComp/A";
 
 const Collapse = ({ title }) => {
   const mainData = [
@@ -58,7 +61,7 @@ const Collapse = ({ title }) => {
   );
   const [collapse, setCollapse] = useState(false);
   return (
-    <div className="navigation__list">
+    <Div className="navigation__list">
       <div
         className="navigation__list__header"
         role="button"
@@ -68,28 +71,28 @@ const Collapse = ({ title }) => {
         aria-controls="main"
         onClick={() => setCollapse(!collapse)}
       >
-        <span>{title}</span>
-        <div
+        <Span>{title}</Span>
+        <Div
           className={`navigation__list__header__icon ${
             collapse ? "" : "navigation__list__header__rotate"
           }`}
         >
           <TbChevronRight size={15} />
-        </div>
+        </Div>
       </div>
 
-      <div
+      <Div
         className={`navigation__list__collapse ${collapse ? "" : "show"}`}
         id="main"
       >
         {data.map((item, i) => (
-          <a key={i} href="#" className="navigation__list__item">
+          <A key={i} href="#" className="navigation__list__item">
             {item.icon}
-            <span>{item.name}</span>
-          </a>
+            <Span>{item.name}</Span>
+          </A>
         ))}
-      </div>
-    </div>
+      </Div>
+    </Div>
   );
 };
 

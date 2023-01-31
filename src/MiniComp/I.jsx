@@ -2,7 +2,7 @@ import React from 'react';
 
 const I = (props) => {
   return (
-    <i className={props.Class}>{props.children}</i>
+    <i className={props.className}>{props.children}</i>
   );
 }
 
