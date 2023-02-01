@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoPlay } from "react-icons/io5";
 import { MdOutlineMoreHoriz } from "react-icons/md";
 import A from "../MiniComp/A";
@@ -9,7 +9,55 @@ import Li from "../MiniComp/Li";
 import Span from "../MiniComp/Span";
 import Ul from "../MiniComp/Ul";
 
-const MiddleContent = ({ playlist }) => {
+const MiddleContent = ({
+  playlist,
+  handleTrack,
+  fetchPlaylist,
+  handlePlay,
+}) => {
+  const [artists, setArtists] = useState([
+    {
+      name: "Hoodie Allen",
+      type: "Artist",
+      picture_big:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg",
+    },
+    {
+      name: "Mike Stud",
+      type: "Artist",
+      picture_big:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/mikestud.jpg",
+    },
+    {
+      name: "Drake",
+      type: "Artist",
+      picture_big:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/drake.jpeg",
+    },
+    {
+      name: "J. Cole",
+      type: "Artist",
+      picture_big:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/jcole.jpg",
+    },
+    {
+      name: "Big Sean",
+      type: "Artist",
+      picture_big:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/bigsean.jpg",
+    },
+    {
+      name: "Wiz Khalifa",
+      type: "Artist",
+      picture_big: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/wiz.jpeg",
+    },
+    {
+      name: "Yonas",
+      type: "Artist",
+      picture_big:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/yonas.jpg",
+    },
+  ]);
   return (
     <>
       {playlist.length > 0 && (
@@ -36,7 +84,7 @@ const MiddleContent = ({ playlist }) => {
                   </Div>
 
                   <Div className="artist__info__actions">
-                    <Button className="button-dark">
+                    <Button onClick={handlePlay} className="button-dark">
                       <IoPlay size={18} />
                       Play
                     </Button>
@@ -120,124 +168,42 @@ const MiddleContent = ({ playlist }) => {
                       <Div className="section-title">Popular</Div>
 
                       <Div className="tracks">
-                        <Div className="track">
-                          <Div className="track__art">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/whenDarkOut.jpg"
-                              alt="When It's Dark Out"
-                            />
+                        {playlist.map((item, index) => (
+                          <Div
+                            className="track"
+                            onClick={() => handleTrack(index)}
+                            key={index}
+                          >
+                            <Div className="track__art">
+                              <Img
+                                src={item.album.cover_big}
+                                alt="When It's Dark Out"
+                              />
+                            </Div>
+
+                            <Div className="track__number">{index + 1}</Div>
+
+                            <Div className="track__added">
+                              <i className="ion-checkmark-round added"></i>
+                            </Div>
+
+                            <Div className="track__title">{item.title}</Div>
+
+                            <Div className="track__explicit">
+                              <Span className="label">Explicit</Span>
+                            </Div>
+                            {/* from 894651321 to 894,651,321 */}
+                            <Div className="track__plays">
+                              {item.rank
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                            </Div>
                           </Div>
-
-                          <Div className="track__number">1</Div>
-
-                          <Div className="track__added">
-                            <i className="ion-checkmark-round added"></i>
-                          </Div>
-
-                          <Div className="track__title">Me, Myself & I</Div>
-
-                          <Div className="track__explicit">
-                            <Span className="label">Explicit</Span>
-                          </Div>
-
-                          <Div className="track__plays">147,544,165</Div>
-                        </Div>
-
-                        <Div className="track">
-                          <Div className="track__art">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/tth.jpg"
-                              alt="These Things Happen"
-                            />
-                          </Div>
-
-                          <Div className="track__number">2</Div>
-
-                          <Div className="track__added">
-                            <i className="ion-plus not-added"></i>
-                          </Div>
-
-                          <Div className="track__title">I Mean It</Div>
-
-                          <Div className="track__explicit">
-                            <Span className="label">Explicit</Span>
-                          </Div>
-
-                          <Div className="track__plays">74,568,782</Div>
-                        </Div>
-
-                        <Div className="track">
-                          <Div className="track__art">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/whenDarkOut.jpg"
-                              alt="When It's Dark Out"
-                            />
-                          </Div>
-
-                          <Div className="track__number">3</Div>
-
-                          <Div className="track__added">
-                            <i className="ion-checkmark-round added"></i>
-                          </Div>
-
-                          <Div className="track__title">Calm Down</Div>
-
-                          <Div className="track__explicit">
-                            <Span className="label">Explicit</Span>
-                          </Div>
-
-                          <Div className="track__plays">13,737,506</Div>
-                        </Div>
-
-                        <Div className="track">
-                          <Div className="track__art">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/whenDarkOut.jpg"
-                              alt="When It's Dark Out"
-                            />
-                          </Div>
-
-                          <Div className="track__number">4</Div>
-
-                          <Div className="track__added">
-                            <i className="ion-plus not-added"></i>
-                          </Div>
-
-                          <Div className="track__title">Some Kind Of Drug</Div>
-
-                          <Div className="track__explicit">
-                            <Span className="label">Explicit</Span>
-                          </Div>
-
-                          <Div className="track__plays">12,234,881</Div>
-                        </Div>
-
-                        <Div className="track">
-                          <Div className="track__art">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/tth.jpg"
-                              alt="These Things Happen"
-                            />
-                          </Div>
-
-                          <Div className="track__number">5</Div>
-
-                          <Div className="track__added">
-                            <i className="ion-checkmark-round added"></i>
-                          </Div>
-
-                          <Div className="track__title">Let's Get Lost</Div>
-
-                          <Div className="track__explicit">
-                            <Span className="label">Explicit</Span>
-                          </Div>
-
-                          <Div className="track__plays">40,882,954</Div>
-                        </Div>
+                        ))}
                       </Div>
 
                       <Button className="show-more button-light">
-                        Show 5 More
+                        Show More
                       </Button>
                     </Div>
 
@@ -245,88 +211,21 @@ const MiddleContent = ({ playlist }) => {
                       <Div className="section-title">Related Artists</Div>
 
                       <Div className="related-artists">
-                        <A href="#" className="related-artist">
-                          <Span className="related-artist__img">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg"
-                              alt="Hoodie Allen"
-                            />
-                          </Span>
+                        {artists.map((item, index) => (
+                          <Div
+                            onClick={() => fetchPlaylist(item.name)}
+                            className="related-artist"
+                            key={index}
+                          >
+                            <Span className="related-artist__img">
+                              <Img src={item.picture_big} alt="..." />
+                            </Span>
 
-                          <Span className="related-artist__name">
-                            Hoodie Allen
-                          </Span>
-                        </A>
-
-                        <A href="#" className="related-artist">
-                          <Span className="related-artist__img">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/mikestud.jpg"
-                              alt="Mike Stud"
-                            />
-                          </Span>
-
-                          <Span className="related-artist__name">
-                            Mike Stud
-                          </Span>
-                        </A>
-
-                        <A href="#" className="related-artist">
-                          <Span className="related-artist__img">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/drake.jpeg"
-                              alt="Drake"
-                            />
-                          </Span>
-
-                          <Span className="related-artist__name">Drake</Span>
-                        </A>
-
-                        <A href="#" className="related-artist">
-                          <Span className="related-artist__img">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/jcole.jpg"
-                              alt="J. Cole"
-                            />
-                          </Span>
-
-                          <Span className="related-artist__name">J. Cole</Span>
-                        </A>
-
-                        <A href="#" className="related-artist">
-                          <Span className="related-artist__img">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/bigsean.jpg"
-                              alt="Big Sean"
-                            />
-                          </Span>
-
-                          <Span className="related-artist__name">Big Sean</Span>
-                        </A>
-
-                        <A href="#" className="related-artist">
-                          <Span className="related-artist__img">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/wiz.jpeg"
-                              alt="Wiz Khalifa"
-                            />
-                          </Span>
-
-                          <Span className="related-artist__name">
-                            Wiz Khalifa
-                          </Span>
-                        </A>
-
-                        <A href="#" className="related-artist">
-                          <Span className="related-artist__img">
-                            <Img
-                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/yonas.jpg"
-                              alt="Yonas"
-                            />
-                          </Span>
-
-                          <Span className="related-artist__name">Yonas</Span>
-                        </A>
+                            <Span className="related-artist__name">
+                              {item.name}
+                            </Span>
+                          </Div>
+                        ))}
                       </Div>
                     </Div>
 

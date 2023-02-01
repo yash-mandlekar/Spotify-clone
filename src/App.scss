@@ -12,7 +12,7 @@ body {
 
 $green: rgb(30, 215, 96);
 $light-black: rgb(41, 41, 41);
-$black: rgb(0, 0, 0);
+$black: rgb(16, 16, 16);
 $grey: rgb(170, 170, 170);
 $sand: rgb(200, 200, 200);
 $white: rgb(255, 255, 255);
@@ -252,7 +252,7 @@ body {
 
 .navigation {
   & {
-    height: 517px;
+    max-height: 517px;
     padding: $padding;
     background: $black;
     color: $grey;
@@ -330,6 +330,7 @@ body {
 
 @media (max-width: 768px) {
   .navigation {
+    max-height: 150px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
@@ -1112,6 +1113,7 @@ body {
       display: flex;
       flex-flow: row wrap;
       align-items: center;
+      cursor: pointer;
     }
 
     &:hover {
@@ -1254,6 +1256,9 @@ body {
       background: $light-black;
       padding: $padding-xs;
       margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
     }
 
     &:hover {
@@ -1454,7 +1459,7 @@ body {
     .friend {
       & {
         padding: $padding 0;
-
+        gap: $margin;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;

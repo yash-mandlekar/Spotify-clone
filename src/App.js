@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.scss";
+import "./App.css";
 import A from "./MiniComp/A";
 import Button from "./MiniComp/Button";
 import Div from "./MiniComp/Div";
@@ -18,6 +19,7 @@ import { IoIosSkipBackward, IoIosSkipForward } from "react-icons/io";
 import { IoPauseCircleOutline, IoPlayCircleOutline } from "react-icons/io5";
 import MiddleContent from "./Components/MiddleContent";
 import RightContent from "./Components/RightContent";
+import Loader from "./Components/Loader";
 
 const App = () => {
   const audioRef = useRef(null);
@@ -31,68 +33,93 @@ const App = () => {
   });
   const { currentTime, duration } = time;
 
-  const fetchPlaylist = async () => {
-    const { data } = await Axios.get("/search");
-    if (data.data) {
+  const fetchPlaylist = async (e) => {
+    setplaylist([]);
+    const { data } = await Axios.get(`/search?q=${e || "eminem"}`);
+    if (data.data) {        
       setplaylist(data.data);
-      console.log(data.data);
     } else {
-      fetchPlaylist();
+      fetchPlaylist(e);
     }
   };
 
   useEffect(() => {
-    fetchPlaylist();
+    fetchPlaylist("Weekend");
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (audioRef.current) {
-        var ct;
-        if (Math.floor(audioRef.current.currentTime) < 10) {
-          ct = "00:" + "0" + Math.floor(audioRef.current.currentTime);
-        } else {
-          ct = "00:" + Math.floor(audioRef.current.currentTime);
+    if (isPlaying) {
+      const interval = setInterval(() => {
+        if (audioRef.current) {
+          var ct;
+          if (Math.floor(audioRef.current.currentTime) < 10) {
+            ct = "00:" + "0" + Math.floor(audioRef.current.currentTime);
+          } else {
+            ct = "00:" + Math.floor(audioRef.current.currentTime);
+          }
+          setTime({
+            currentTime: ct,
+            duration: Math.floor(audioRef.current.duration) || "30",
+          });
         }
-        setTime({
-          currentTime: ct,
-          duration: Math.floor(audioRef.current.duration) || "30",
-        });
-      }
-    }, 1000);
-    const interval2 = setInterval(() => {
-      if (audioRef.current) {
-        setProgress(audioRef.current.currentTime);
-      }
-    }, 100);
-    return () => {
-      clearInterval(interval);
-      clearInterval(interval2);
-    };
-  }, []);
+      }, 1000);
+      const interval2 = setInterval(() => {
+        if (audioRef.current) {
+          setProgress(audioRef.current.currentTime);
+        }
+      }, 100);
+      return () => {
+        clearInterval(interval);
+        clearInterval(interval2);
+      };
+    }
+  }, [isPlaying]);
   const handlePlay = () => {
-    audioRef.current.play();
     setIsPlaying(true);
+    audioRef.current.play();
   };
   const handlePause = () => {
     audioRef.current.pause();
     setIsPlaying(false);
   };
-  const handleTrack = () => {
-    if (currentTrack < playlist.length - 1) {
-      setCurrentTrack(currentTrack + 1);
+  const handleTrack = (e) => {
+    if (e) {
+      setCurrentTrack(e);
     } else {
-      setCurrentTrack(0);
+      if (currentTrack < playlist.length - 1) {
+        setCurrentTrack(currentTrack + 1);
+      } else {
+        setCurrentTrack(0);
+      }
     }
+    setIsPlaying(false);
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    setProgress(0);
+    setTimeout(() => {
+      setIsPlaying(true);
+      audioRef.current.play();
+    }, 100);
   };
   return (
     <>
-      <Navbar />
-      <Section className="content">
-        <LeftContent currentTrack={playlist[currentTrack]} />
-        <MiddleContent playlist={playlist} />
-        <RightContent playlist={playlist} />
-      </Section>
+      <Navbar fetchPlaylist={fetchPlaylist} />
+      {playlist && (
+        <Section className="content">
+          <LeftContent currentTrack={playlist[currentTrack]} />
+          {playlist.length > 0 ? (
+            <MiddleContent
+              playlist={playlist}
+              handleTrack={handleTrack}
+              fetchPlaylist={fetchPlaylist}
+              handlePlay={handlePlay}
+            />
+          ) : (
+            <Loader />
+          )}
+          <RightContent playlist={playlist} />
+        </Section>
+      )}
 
       {playlist.length > 0 && (
         <section className="current-track">

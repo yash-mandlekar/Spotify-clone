@@ -1,81 +1,57 @@
 import React from "react";
 import { TbChevronLeft, TbChevronRight, TbChevronDown } from "react-icons/tb";
 import { MdNotifications, MdArchive } from "react-icons/md";
-const Navbar = () => {
+import Div from "../MiniComp/Div";
+import Span from "../MiniComp/Span";
+import Input from "../MiniComp/Input";
+import Dropdown from "./Dropdown";
+const Navbar = ({ fetchPlaylist }) => {
   return (
     <>
       <section className="header">
-        <div className="page-flows">
-          <span className="flow">
+        <Div className="page-flows">
+          <Span className="flow">
             <TbChevronLeft size={30} />
-          </span>
+          </Span>
 
-          <span className="flow">
+          <Span className="flow">
             <TbChevronRight size={30} />
-          </span>
-        </div>
+          </Span>
+        </Div>
 
-        <div className="search">
-          <input type="text" placeholder="Search" />
-        </div>
+        <Div className="search">
+          <Input type="text" placeholder="Search" />
+        </Div>
 
-        <div className="user">
-          <div className="user__notifications">
+        <Div className="user">
+          <Div className="user__notifications">
             <MdNotifications size={25} />
-          </div>
+          </Div>
 
-          <div className="user__inbox">
+          <Div className="user__inbox">
             <MdArchive size={25} />
-          </div>
+          </Div>
 
-          <div className="user__info">
-            <span className="user__info__img">
+          <Div className="user__info">
+            <Span className="user__info__img">
               <img
-                src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/adam_proPic.jpg"
+                src="https://www.yashmandlekar.in/static/media/photu.072af0ae01c3a241647e.jpg"
                 alt="Profile Picture"
                 className="img-responsive"
               />
-            </span>
+            </Span>
 
-            <span className="user__info__name">
-              <span className="first">Adam</span>
+            <Span className="user__info__name">
+              <Span className="first">Yash</Span>
 
-              <span className="last">Lowenthal</span>
-            </span>
-          </div>
+              <Span className="last">Kumar</Span>
+            </Span>
+          </Div>
 
-          <div className="user__actions">
-            <div className="dropdown">
-              <button
-                className="dropdown-toggle"
-                type="button"
-                id="dropdownMenu1"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="true"
-              >
-                <TbChevronDown size={25} />
-              </button>
-              {/* <ul
-                className="dropdown-menu dropdown-menu-right"
-                aria-labelledby="dropdownMenu1"
-              >
-                <li>
-                  <a href="#">Private Session</a>
-                </li>
-                <li>
-                  <a href="#">Account</a>
-                </li>
-                <li>
-                  <a href="#">Settings</a>
-                </li>
-                <li>
-                  <a href="#">Log Out</a>
-                </li>
-              </ul> */}
-            </div>
-          </div>
-        </div>
+          <Div className="user__actions">
+            <Dropdown />
+          </Div>
+        </Div>
       </section>
     </>
   );

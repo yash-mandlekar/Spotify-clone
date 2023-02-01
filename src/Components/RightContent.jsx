@@ -1,45 +1,48 @@
 import React from "react";
+import { IoPersonSharp } from "react-icons/io5";
+import A from "../MiniComp/A";
+import Div from "../MiniComp/Div";
 
 const RightContent = () => {
   return (
     <>
-      <div className="content__right">
-        <div className="social">
-          <div className="friends">
-            <a href="#" className="friend">
-              <i className="ion-android-person"></i>
+      <Div className="content__right">
+        <Div className="social">
+          <Div className="friends">
+            <A href="#" className="friend">
+              <IoPersonSharp />
               Sam Smith
-            </a>
+            </A>
 
-            <a href="#" className="friend">
-              <i className="ion-android-person"></i>
+            <A href="#" className="friend">
+              <IoPersonSharp />
               Tarah Forsyth
-            </a>
+            </A>
 
-            <a href="#" className="friend">
-              <i className="ion-android-person"></i>
+            <A href="#" className="friend">
+              <IoPersonSharp />
               Ricahrd Tomkins
-            </a>
+            </A>
 
-            <a href="#" className="friend">
-              <i className="ion-android-person"></i>
+            <A href="#" className="friend">
+              <IoPersonSharp />
               Tony Russo
-            </a>
+            </A>
 
-            <a href="#" className="friend">
-              <i className="ion-android-person"></i>
+            <A href="#" className="friend">
+              <IoPersonSharp />
               Alyssa Marist
-            </a>
+            </A>
 
-            <a href="#" className="friend">
-              <i className="ion-android-person"></i>
+            <A href="#" className="friend">
+              <IoPersonSharp />
               Ron Samson
-            </a>
-          </div>
+            </A>
+          </Div>
 
           <button className="button-light">Find Friends</button>
-        </div>
-      </div>
+        </Div>
+      </Div>
     </>
   );
 };
