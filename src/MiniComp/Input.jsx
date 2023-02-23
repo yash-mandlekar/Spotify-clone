@@ -4,12 +4,12 @@ const Input = (props) => {
   return (
     <input
       className={props?.className}
-      type={props?.Type}
-      name={props?.Name}
-      placeholder={props?.Placeholder}
-      value={props?.Value}
+      type={props?.type}
+      name={props?.name}
+      placeholder={props?.placeholder}
+      value={props?.value}
       onChange={props?.OnChange}
-      required={props?.Required}
+      required={props?.required}
     />
   );
 };
