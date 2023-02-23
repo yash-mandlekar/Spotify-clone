@@ -6,6 +6,11 @@ import Span from "../MiniComp/Span";
 import Input from "../MiniComp/Input";
 import Dropdown from "./Dropdown";
 const Navbar = ({ fetchPlaylist }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchPlaylist(e.target.artist.value);
+  };
+
   return (
     <>
       <section className="header">
@@ -19,9 +24,9 @@ const Navbar = ({ fetchPlaylist }) => {
           </Span>
         </Div>
 
-        <Div className="search">
-          <Input type="text" placeholder="Search" />
-        </Div>
+        <form onSubmit={handleSubmit} className="search">
+          <Input type="text" name="artist" placeholder="Search" />
+        </form>
 
         <Div className="user">
           <Div className="user__notifications">
