@@ -252,7 +252,7 @@ body {
 
 .navigation {
   & {
-    max-height: 517px;
+    max-height: 73vh;
     padding: $padding;
     background: $black;
     color: $grey;
@@ -450,9 +450,9 @@ body {
 
 .current-track {
   & {
-    //position: fixed;
-    //bottom: 0;
-    //width: 100%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 
     background: $light-black;
     padding: $padding-xs $padding;
@@ -749,7 +749,7 @@ body {
 }
 
 .artist {
-  height: 617px;
+  height: 84vh;
   overflow-y: scroll;
 
   &__header {
