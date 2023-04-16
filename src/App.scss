@@ -742,6 +742,10 @@ body {
 
 @media (max-width: 768px) {
   .current-track {
+    & {
+      justify-content: center;
+    }
+
     &__action {
       padding-top: $padding;
     }
